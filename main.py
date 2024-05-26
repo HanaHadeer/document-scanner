@@ -1,6 +1,7 @@
 import cv2
 from cv2 import imshow, waitKey, VideoCapture
 import numpy as np
+from datetime import datetime
 
 cap = VideoCapture(1)  # value (1) for a second camera device (phone), (0) for webcam
 
@@ -92,7 +93,10 @@ while True:
         key = cv2.waitKey(1)
 
         if key == ord('s'):
-            cv2.imwrite('myDoc.jpg', imgWarped)
+            # cv2.imwrite('myDoc.jpg', imgWarped)
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f'myDoc_{timestamp}.jpg'
+            cv2.imwrite(filename, imgWarped)
 
         rescaleImgWarped = rescale_frame(imgWarped, percent=50)
         cv2.imshow('Document', rescaleImgWarped)
